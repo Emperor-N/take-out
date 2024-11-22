@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: my-take-out
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://${phn.db.host}:${phn.db.port}/my-take-out?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${phn.db.un}
+    password: ${phn.db.pw}
+logging:
+  level:
+    com.phn: debug
+  pattern:
+    dateformat: HH:mm:ss:SSS
+  file:
+    path: "logs/${spring.application.name}"
+
+knife4j:
+  enable: true
+  openapi:
+    title: "外卖系统接口文档"
+    description: "外卖系统"
+    email: 3577405535@qq.com
+    concat: 彭皓楠
+    version: v1.0.0
+    group:
+      default:
+        group-name: default
+        api-rule: package
+        api-rule-resources:
+          - com.phn.mytakeout.controller
