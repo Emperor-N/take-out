@@ -1,17 +1,36 @@
-package com.phn.mytakeout.config;
+package com.phn.mytakeout.Interceptor;
 
 
+import com.phn.mytakeout.properties.JwtProperties;
+import com.phn.mytakeout.utils.JwtTool;
 import com.phn.mytakeout.utils.ThreadLocalUserContext;
+import io.jsonwebtoken.Claims;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Component
+@RequiredArgsConstructor
 public class Interceptor implements HandlerInterceptor {
+
+    private final JwtProperties jwtProperties;
+
+    private final JwtTool jwtTool;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        // 1.获取请求头中的 token
+        String token = request.getHeader("authorization");
+        // 2.校验token
+        Claims claims = jwtTool.parseToken(jwtProperties.getSecret(), token);
+        Long userId = (Long)claims.get("userId");
+        // 3.存入上下文
+        ThreadLocalUserContext.setUser(userId);
+        // 4.放行
         return true;
     }
 

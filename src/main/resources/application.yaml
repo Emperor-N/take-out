@@ -33,3 +33,10 @@ knife4j:
         api-rule: package
         api-rule-resources:
           - com.phn.mytakeout.controller
+phn:
+  jwt:
+    secret: phn-takeout
+    ttl: 7200000
+  auth:
+    excludePaths:
+      - /employee/login
