@@ -327,3 +327,34 @@ Caused by: java.io.IOException: 你的主机中的软件中止了一个已建立
 09:07:17:565 DEBUG 29340 --- [http-nio-8080-exec-3] c.p.m.mapper.employeeMapper.selectOne    : <==      Total: 1
 09:09:03:745  INFO 29340 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 09:09:03:756  INFO 29340 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+09:09:06:859  INFO 16400 --- [main] com.phn.mytakeout.MyTakeOutApplication   : Starting MyTakeOutApplication using Java 17.0.10 on Emperor with PID 16400 (E:\project_java\my-take-out\target\classes started by asus in E:\project_java\my-take-out)
+09:09:06:860 DEBUG 16400 --- [main] com.phn.mytakeout.MyTakeOutApplication   : Running with Spring Boot v2.7.12, Spring v5.3.27
+09:09:06:861  INFO 16400 --- [main] com.phn.mytakeout.MyTakeOutApplication   : The following 1 profile is active: "dev"
+09:09:07:329  INFO 16400 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+09:09:07:331  INFO 16400 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+09:09:07:345  INFO 16400 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 0 Redis repository interfaces.
+09:09:07:733  INFO 16400 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+09:09:07:740  INFO 16400 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+09:09:07:740  INFO 16400 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+09:09:07:809  INFO 16400 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+09:09:07:809  INFO 16400 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 920 ms
+09:09:08:085  WARN 16400 --- [main] c.b.m.core.metadata.TableInfoHelper      : This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.phn.mytakeout.domain.po.dish"
+09:09:08:108  WARN 16400 --- [main] c.b.m.core.metadata.TableInfoHelper      : This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.phn.mytakeout.domain.po.orders"
+09:09:08:129  WARN 16400 --- [main] c.b.m.core.metadata.TableInfoHelper      : This primary key of "id" is primitive !不建议如此请使用包装类 in Class: "com.phn.mytakeout.domain.po.setmeal"
+09:09:08:445  INFO 16400 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2ControllerWebMvc#getDocumentation(String, HttpServletRequest)]
+09:09:08:682  INFO 16400 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+09:09:08:683  INFO 16400 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Documentation plugins bootstrapped
+09:09:08:685  INFO 16400 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+09:09:08:700  INFO 16400 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+09:09:08:757  INFO 16400 --- [main] com.phn.mytakeout.MyTakeOutApplication   : Started MyTakeOutApplication in 2.154 seconds (JVM running for 2.623)
+09:09:15:380  INFO 16400 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:09:15:380  INFO 16400 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+09:09:15:381  INFO 16400 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+09:09:19:471  INFO 16400 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+09:09:19:857  INFO 16400 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+09:09:19:865 DEBUG 16400 --- [http-nio-8080-exec-2] c.p.m.mapper.employeeMapper.selectOne    : ==>  Preparing: SELECT id,position_name,username,password,gender,status,number,create_time,update_time,create_user,update_user FROM employee WHERE (username = ?)
+09:09:19:890 DEBUG 16400 --- [http-nio-8080-exec-2] c.p.m.mapper.employeeMapper.selectOne    : ==> Parameters: admin(String)
+09:09:19:914 DEBUG 16400 --- [http-nio-8080-exec-2] c.p.m.mapper.employeeMapper.selectOne    : <==      Total: 1
+09:10:35:914 DEBUG 16400 --- [http-nio-8080-exec-1] c.p.m.mapper.employeeMapper.selectOne    : ==>  Preparing: SELECT id,position_name,username,password,gender,status,number,create_time,update_time,create_user,update_user FROM employee WHERE (username = ?)
+09:10:35:914 DEBUG 16400 --- [http-nio-8080-exec-1] c.p.m.mapper.employeeMapper.selectOne    : ==> Parameters: admin(String)
+09:10:35:916 DEBUG 16400 --- [http-nio-8080-exec-1] c.p.m.mapper.employeeMapper.selectOne    : <==      Total: 1
