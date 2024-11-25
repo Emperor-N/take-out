@@ -7,7 +7,7 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:mysql://${phn.db.host}:${phn.db.port}/my-take-out?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://${phn.db.host}:${phn.db.port}/my_take_out?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ${phn.db.un}
     password: ${phn.db.pw}
@@ -39,4 +39,9 @@ phn:
     ttl: 7200000
   auth:
     excludePaths:
-      - /employee/login
+      - /admin/employee/login
+  db:
+    host: 192.168.60.131
+    port: 3306
+    un: root
+    pw: 123

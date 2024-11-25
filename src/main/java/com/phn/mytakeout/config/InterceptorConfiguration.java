@@ -29,14 +29,17 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
         InterceptorRegistration interceptorRegistration = registry.addInterceptor(interceptor);
         //配置拦截路径
         List<String > includePaths = authProperties.getIncludePaths();
-        for(String path:includePaths){
-            interceptorRegistration.addPathPatterns(path);
+        if(includePaths != null){
+            for(String path:includePaths){
+                interceptorRegistration.addPathPatterns(path);
+            }
         }
         //配置放行路径
         List<String > excludePaths = authProperties.getExcludePaths();
-        for(String path:excludePaths){
-            interceptorRegistration.excludePathPatterns(path);
+        if(excludePaths != null){
+            for(String path:excludePaths){
+                interceptorRegistration.excludePathPatterns(path);
+            }
         }
-
     }
 }

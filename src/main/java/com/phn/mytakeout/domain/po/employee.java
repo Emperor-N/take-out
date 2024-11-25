@@ -1,5 +1,8 @@
 package com.phn.mytakeout.domain.po;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,16 +14,20 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@TableName("employee")
 public class employee {
-    private int id;
+    @TableId("id")
+    private Long id;
 
     private String positionName;//管理员或普通员工
-
+    @TableField("username")
     private String userName;//用户名
 
     private String password;//密码
 
     private String gender;//性别
+
+    private int status;//账号状态
 
     private String number;//电话号码
 
