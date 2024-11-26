@@ -1,5 +1,7 @@
 package com.phn.mytakeout.domain.po;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +13,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class setmeal {
+@TableName("Setmeal")
+public class Setmeal {
+    @TableId("id")
     private int id;
 
     private int categoryId;//套餐分类id

@@ -9,6 +9,7 @@ import com.phn.mytakeout.service.employeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -26,6 +27,22 @@ public class employeeController {
     @GetMapping("/employee/page")
     public Result<PageResult> getEmployeePage(EmployeeQueryDTO employeeQueryDTO){
         return Result.success(employeeService.search(employeeQueryDTO));
+    }
+
+    @PostMapping("/employee/search")
+    public Result<PageResult> search(@RequestBody EmployeeQueryDTO employeeQueryDTO){
+        return Result.success(employeeService.searchByMsg(employeeQueryDTO));
+    }
+    @DeleteMapping("/employee/delete")
+    public Result delete(@RequestBody List<Long> ids){
+        employeeService.deleteByIds(ids);
+        return Result.success();
+    }
+
+    @PostMapping("/employee/status/{status}")
+    public Result modifyStatus(@PathVariable ("status") Integer status, @RequestParam Integer id){
+        employeeService.modifyStatus(status,id);
+        return Result.success();
     }
 
 }

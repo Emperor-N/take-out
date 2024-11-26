@@ -14,20 +14,22 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@TableName("employee")
-public class employee {
+@TableName("Employee")
+public class Employee {
     @TableId("id")
     private Long id;
 
-    private String positionName;//管理员或普通员工
-    @TableField("username")
-    private String userName;//用户名
+    private String username;//用户名
 
     private String password;//密码
 
     private String gender;//性别
 
     private int status;//账号状态
+
+    private String image;//图片
+
+    private String idNumber;//图片
 
     private String number;//电话号码
 
