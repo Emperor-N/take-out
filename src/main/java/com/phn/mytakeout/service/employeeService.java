@@ -1,6 +1,8 @@
 package com.phn.mytakeout.service;
 
 import com.phn.mytakeout.Result.PageResult;
+import com.phn.mytakeout.Result.Result;
+import com.phn.mytakeout.domain.dto.AddAndModifyEmployeeDTO;
 import com.phn.mytakeout.domain.dto.EmployeeQueryDTO;
 import com.phn.mytakeout.domain.dto.LoginFormDTO;
 import com.phn.mytakeout.domain.po.Employee;
@@ -18,5 +20,13 @@ public interface employeeService extends IService<Employee>{
 
     void deleteByIds(List<Long> ids);
 
-    void modifyStatus(int status,int id);
+    void modifyStatus(int status,Long id);
+
+    void addEmployee(AddAndModifyEmployeeDTO addEmployeeDTO);
+
+    Employee getEmployeeById(Long id);
+
+    Result<Employee> modifyPassword(String newPassword);
+
+    void modifyEmployee(AddAndModifyEmployeeDTO modifyEmployeeDTO);
 }

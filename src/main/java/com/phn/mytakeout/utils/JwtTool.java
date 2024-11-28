@@ -6,6 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,7 +16,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class JwtTool {
 
-    public String createJwt(String secretKey,Long userId, long ttl) {
+    public String createJwt(String secretKey, Long userId, long ttl) {
         // 指定签名的时候使用的签名算法，也就是header那部分
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 

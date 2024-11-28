@@ -23,14 +23,21 @@ public class Interceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//        // 1.获取请求头中的 token
-//        String token = request.getHeader("Authorization");
-//        // 2.校验token
-//        Claims claims = jwtTool.parseToken(jwtProperties.getSecret(), token);
-//        Long userId = (Long)claims.get("userId");
-//        // 3.存入上下文
-//        ThreadLocalUserContext.setUser(userId);
-//        // 4.放行
+        // 1.获取请求头中的 token
+        String[] cookies1 = request.getHeader("Cookie").split(";");
+        String token = null;
+        for (String cookie : cookies1) {
+            if(cookie.contains("token")){
+                token = cookie.split("=")[1];
+            }
+        }
+
+        // 2.校验token
+        Claims claims = jwtTool.parseToken(jwtProperties.getSecret(), token);
+        int userId = (int)claims.get("userId");
+        // 3.存入上下文
+        ThreadLocalUserContext.setUser((long) userId);
+        // 4.放行
         return true;
     }
 
