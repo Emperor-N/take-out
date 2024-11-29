@@ -64,12 +64,7 @@ public class employeeServiceImpl extends ServiceImpl<employeeMapper, Employee> i
     public PageResult search(EmployeeQueryDTO employeeQueryDTO) {
         Page<Employee> page = new Page<>(employeeQueryDTO.getPage(), employeeQueryDTO.getPageSize());
 
-        // 创建查询条件并执行分页查询
         Page<Employee> result = lambdaQuery()
-                .like(StringUtils.isNotBlank(employeeQueryDTO.getUsername()), Employee::getUsername, employeeQueryDTO.getUsername())
-//                .eq(employeeQueryDTO.getStatus() != null,Employee::getStatus,employeeQueryDTO.getStatus())
-//                .lt(employeeQueryDTO.getEndTime()!=null,Employee::getCreateTime,employeeQueryDTO.getEndTime())
-//                .gt(employeeQueryDTO.getStartTime()!=null,Employee::getCreateTime,employeeQueryDTO.getStartTime())
                 .page(page);
 
         // 设置结果
@@ -143,10 +138,11 @@ public class employeeServiceImpl extends ServiceImpl<employeeMapper, Employee> i
         employeeMapper.deleteById(modifyEmployeeDTO.getId());
 
         Employee employee = new Employee();
+        employee.setStatus(one.getStatus());
         employee.setPassword(one.getPassword());
         employee.setUpdateTime(LocalDateTime.now());
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateUser(one.getUpdateUser());
+        employee.setCreateTime(one.getCreateTime());
+        employee.setUpdateUser(ThreadLocalUserContext.getUser());
         employee.setCreateUser(one.getCreateUser());
         BeanUtils.copyProperties(modifyEmployeeDTO,employee);
         employeeMapper.insert(employee);

@@ -3,7 +3,8 @@ package com.phn.mytakeout.domain.dto;
 import lombok.Data;
 
 @Data
-public class AddAndModifyCategory {
+public class AddAndModifyCategoryDTO {
+    private Long id;
     private String name;
     private String description;
     private Integer type;
