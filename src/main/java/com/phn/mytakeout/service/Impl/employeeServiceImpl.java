@@ -9,7 +9,7 @@ import com.phn.mytakeout.domain.dto.AddAndModifyEmployeeDTO;
 import com.phn.mytakeout.domain.dto.EmployeeQueryDTO;
 import com.phn.mytakeout.domain.dto.LoginFormDTO;
 import com.phn.mytakeout.domain.po.Employee;
-import com.phn.mytakeout.domain.vo.employeeVo;
+import com.phn.mytakeout.domain.vo.EmployeeVO;
 import com.phn.mytakeout.mapper.employeeMapper;
 import com.phn.mytakeout.properties.JwtProperties;
 import com.phn.mytakeout.service.employeeService;
@@ -21,7 +21,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +36,7 @@ public class employeeServiceImpl extends ServiceImpl<employeeMapper, Employee> i
     private final employeeMapper employeeMapper;
 
     @Override
-    public employeeVo login(LoginFormDTO loginFormDTO) {
+    public EmployeeVO login(LoginFormDTO loginFormDTO) {
 
         String userName = loginFormDTO.getUsername();
         String password = loginFormDTO.getPassword();
@@ -50,7 +52,7 @@ public class employeeServiceImpl extends ServiceImpl<employeeMapper, Employee> i
             return null;//抛出账号异常
         }
 
-        employeeVo vo = new employeeVo();
+        EmployeeVO vo = new EmployeeVO();
 
         //生成token
         String token = jwtTool.createJwt(jwtProperties.getSecret(), emp.getId(), jwtProperties.getTtl());
@@ -66,6 +68,26 @@ public class employeeServiceImpl extends ServiceImpl<employeeMapper, Employee> i
 
         Page<Employee> result = lambdaQuery()
                 .page(page);
+
+        Map<Long, String> createMap = new HashMap<>();
+        Map<Long, String> updateMap = new HashMap<>();
+        for(Employee employee:result.getRecords()){
+            Employee createUserInfo = employeeMapper.selectById(employee.getCreateUser());
+            Employee updateUserInfo = employeeMapper.selectById(employee.getUpdateUser());
+            if(createMap.get(employee.getCreateUser()) != null){
+                employee.setCreateUserName(createMap.get(employee.getCreateUser()));
+            }else{
+                createMap.put(employee.getCreateUser(), createUserInfo.getUsername());
+                employee.setCreateUserName(createMap.get(employee.getCreateUser()));
+            }
+
+            if(updateMap.get(employee.getUpdateUser()) != null){
+                employee.setUpdateUserName(createMap.get(employee.getUpdateUser()));
+            }else{
+                updateMap.put(employee.getUpdateUser(), updateUserInfo.getUsername());
+                employee.setUpdateUserName(updateMap.get(employee.getUpdateUser()));
+            }
+        }
 
         // 设置结果
         PageResult pageResult = new PageResult();
@@ -86,6 +108,25 @@ public class employeeServiceImpl extends ServiceImpl<employeeMapper, Employee> i
                 .lt(employeeQueryDTO.getEndTime()!=null,Employee::getCreateTime,employeeQueryDTO.getEndTime())
                 .gt(employeeQueryDTO.getStartTime()!=null,Employee::getCreateTime,employeeQueryDTO.getStartTime())
                 .page(page);
+        Map<Long, String> createMap = new HashMap<>();
+        Map<Long, String> updateMap = new HashMap<>();
+        for(Employee employee:result.getRecords()){
+            Employee createUserInfo = employeeMapper.selectById(employee.getCreateUser());
+            Employee updateUserInfo = employeeMapper.selectById(employee.getUpdateUser());
+            if(createMap.get(employee.getCreateUser()) != null){
+                employee.setCreateUserName(createMap.get(employee.getCreateUser()));
+            }else{
+                createMap.put(employee.getCreateUser(), createUserInfo.getUsername());
+                employee.setCreateUserName(createMap.get(employee.getCreateUser()));
+            }
+
+            if(updateMap.get(employee.getUpdateUser()) != null){
+                employee.setUpdateUserName(createMap.get(employee.getUpdateUser()));
+            }else{
+                updateMap.put(employee.getUpdateUser(), updateUserInfo.getUsername());
+                employee.setUpdateUserName(updateMap.get(employee.getUpdateUser()));
+            }
+        }
 
         // 设置结果
         PageResult pageResult = new PageResult();

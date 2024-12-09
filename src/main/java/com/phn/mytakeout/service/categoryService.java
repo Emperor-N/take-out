@@ -22,4 +22,6 @@ public interface categoryService  extends IService<Category> {
     void modifyStatus(int status, Long id);
 
     PageResult searchByMsg(CategoryQueryDTO categoryQueryDTO);
+
+    List<Category> listByType(Integer type);
 }

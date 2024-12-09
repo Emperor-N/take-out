@@ -1,6 +1,7 @@
 package com.phn.mytakeout.domain.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -21,9 +22,9 @@ public class Category {
 
     private String name;//用户名
 
-    private int type;//所属类型
+    private Integer type;//所属类型
 
-    private int status;//分类状态
+    private Integer status;//分类状态
 
     private String image;//图片
 
@@ -35,5 +36,11 @@ public class Category {
 
     private Long createUser;//创建人id
 
+    @TableField(exist = false)
+    private String createUserName;//创建人id
+
     private Long updateUser;//更新人id
+
+    @TableField(exist = false)
+    private String updateUserName;//更新人id
 }

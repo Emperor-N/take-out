@@ -58,4 +58,9 @@ public class categoryController {
         return Result.success();
     }
 
+    @GetMapping("/list")
+    public Result<List<Category>> getCategoryList(@RequestParam Integer type){
+        return Result.success(categoryService.listByType(type));
+    }
+
 }

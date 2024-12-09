@@ -5,11 +5,9 @@ import com.phn.mytakeout.Result.Result;
 import com.phn.mytakeout.domain.dto.AddAndModifyEmployeeDTO;
 import com.phn.mytakeout.domain.dto.EmployeeQueryDTO;
 import com.phn.mytakeout.domain.dto.LoginFormDTO;
-import com.phn.mytakeout.domain.dto.ModifyEmployeeDTO;
 import com.phn.mytakeout.domain.po.Employee;
-import com.phn.mytakeout.domain.vo.employeeVo;
+import com.phn.mytakeout.domain.vo.EmployeeVO;
 import com.phn.mytakeout.service.employeeService;
-import com.phn.mytakeout.utils.ThreadLocalUserContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +21,7 @@ public class employeeController {
     private final employeeService employeeService;
 
     @PostMapping("/login")
-    public Result<employeeVo> login(@RequestBody LoginFormDTO loginFormDTO){
+    public Result<EmployeeVO> login(@RequestBody LoginFormDTO loginFormDTO){
         return Result.success(employeeService.login(loginFormDTO));
     }
 
@@ -46,6 +44,7 @@ public class employeeController {
     public Result<PageResult> search(@RequestBody EmployeeQueryDTO employeeQueryDTO){
         return Result.success(employeeService.searchByMsg(employeeQueryDTO));
     }
+
     @DeleteMapping("/delete")
     public Result delete(@RequestBody List<Long> ids){
         employeeService.deleteByIds(ids);
@@ -53,13 +52,19 @@ public class employeeController {
     }
 
     @PostMapping("/status/{status}")
-    public Result modifyStatus(@PathVariable ("status") int status, @RequestParam Long id){
+    public Result modifyStatus(@PathVariable ("status") Integer status, @RequestParam Long id){
         employeeService.modifyStatus(status,id);
         return Result.success();
     }
 
     @PostMapping("")
     public Result addEmployee(@RequestBody AddAndModifyEmployeeDTO addEmployeeDTO){
+        employeeService.addEmployee(addEmployeeDTO);
+        return Result.success();
+    }
+
+    @PostMapping("/enroll")
+    public Result enrollEmployee(@RequestBody AddAndModifyEmployeeDTO addEmployeeDTO){
         employeeService.addEmployee(addEmployeeDTO);
         return Result.success();
     }

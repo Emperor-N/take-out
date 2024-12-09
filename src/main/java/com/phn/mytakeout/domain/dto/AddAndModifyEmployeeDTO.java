@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class AddAndModifyEmployeeDTO {
-    Long id;
-    String username;
-    Integer gender;
-    String number;
-    String idNumber;
-    String image;
+    private Long id;
+    private String username;
+    private Integer gender;
+    private String number;
+    private String idNumber;
+    private String image;
 }

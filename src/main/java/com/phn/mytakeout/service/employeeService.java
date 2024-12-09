@@ -7,12 +7,12 @@ import com.phn.mytakeout.domain.dto.EmployeeQueryDTO;
 import com.phn.mytakeout.domain.dto.LoginFormDTO;
 import com.phn.mytakeout.domain.po.Employee;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.phn.mytakeout.domain.vo.employeeVo;
+import com.phn.mytakeout.domain.vo.EmployeeVO;
 
 import java.util.List;
 
 public interface employeeService extends IService<Employee>{
-    employeeVo login(LoginFormDTO loginFormDTO);
+    EmployeeVO login(LoginFormDTO loginFormDTO);
 
     PageResult search(EmployeeQueryDTO employeeQueryDTO);
 
