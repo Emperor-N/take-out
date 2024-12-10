@@ -41,7 +41,7 @@ phn:
     excludePaths:
       - /admin/employee/login
   db:
-    host: 192.168.60.132
+    host: 192.168.60.133
     port: 3306
     un: root
     pw: 123

@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @TableName("Orders")
 public class Orders {
     @TableId(value = "id",type = IdType.AUTO)
-    private int id;
+    private Long id;
 
     private String number;//订单号
 
