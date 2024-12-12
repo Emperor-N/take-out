@@ -45,6 +45,8 @@ public class OrderVO {
 
     private String cancelReason;//取消原因
 
+    private String rejectionReason;
+
     private LocalDateTime cancelTime;//取消时间
 
     private LocalDateTime estimatedDeliveryTime;//预计送达时间

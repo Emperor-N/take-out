@@ -50,6 +50,8 @@ public class Orders {
 
     private String cancelReason;//取消原因
 
+    private String rejectionReason;//拒单原因
+
     private LocalDateTime cancelTime;//取消时间
 
     private LocalDateTime estimatedDeliveryTime;//预计送达时间

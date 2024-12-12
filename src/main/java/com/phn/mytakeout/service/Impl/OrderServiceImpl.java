@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.phn.mytakeout.Result.PageResult;
 import com.phn.mytakeout.constant.OrderStatus;
+import com.phn.mytakeout.domain.dto.OrderCancelDTO;
 import com.phn.mytakeout.domain.dto.OrderPageQueryDTO;
+import com.phn.mytakeout.domain.dto.OrderRejectionDTO;
 import com.phn.mytakeout.domain.po.OrderDetail;
 import com.phn.mytakeout.domain.po.Orders;
 import com.phn.mytakeout.domain.vo.OrderStatusNumberVO;
@@ -97,5 +99,29 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Orders> implement
     @Override
     public void complete(Long id) {
         lambdaUpdate().set(Orders::getStatus,OrderStatus.completion).eq(Orders::getId,id).update();
+    }
+
+    @Override
+    public void rejectionAndSetReason(OrderRejectionDTO ordersRejectionDTO) {
+        lambdaUpdate().set(Orders::getStatus,OrderStatus.Canceled).set(Orders::getRejectionReason,ordersRejectionDTO.getRejectionReason()).eq(Orders::getId,ordersRejectionDTO.getId()).update();
+    }
+
+    @Override
+    public void cancelAndSetReason(OrderCancelDTO ordersCancelDTO) {
+        Orders one = lambdaQuery().eq(Orders::getId, ordersCancelDTO.getId()).one();
+        lambdaUpdate().set(Orders::getStatus,one.getStatus()-1).set(Orders::getRejectionReason,ordersCancelDTO.getCancelReason()).eq(Orders::getId,ordersCancelDTO.getId()).update();
+    }
+
+    @Override
+    public OrderVO getOneById(Long id) {
+
+        OrderVO orderVO = new OrderVO();
+
+        Orders one = lambdaQuery().eq(Orders::getId, id).one();
+        BeanUtils.copyProperties(one,orderVO);
+        List<OrderDetail> list = orderDetailService.lambdaQuery().eq(OrderDetail::getOrderId, id).list();
+        orderVO.setOrderDetailList(list);
+        return orderVO;
+
     }
 }

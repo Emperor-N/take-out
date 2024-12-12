@@ -8,4 +8,6 @@ public class OrderStatus {
     public static final Integer DeliveryInProgress = 4; //表示派送中
 
     public static final Integer completion = 5; //表示已完成
+
+    public static final Integer Canceled = 6;
 }
